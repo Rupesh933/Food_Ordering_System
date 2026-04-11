@@ -18,7 +18,7 @@ staticfiles/
 
 
 # dependencies
-/node_modules
+node_modules/
 /.pnp
 .pnp.js
 
@@ -47,7 +47,7 @@ Thumbs.db
 /coverage
 
 # production
-/build
+build/
 
 # misc
 .DS_Store

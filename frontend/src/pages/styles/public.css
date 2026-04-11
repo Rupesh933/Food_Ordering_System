@@ -1,0 +1,49 @@
+.navbar-brand{
+    display: inline-flex;
+    align-items: center;
+}
+.navbar-brand:hover{
+    color: #1370ea !important;
+    transform: translateY(-2px);
+    transition: color 0.5s ease, transform 0.5s ease;
+}
+.navbar-brand:hover svg{
+    animation: shake 0.5s ease-in-out;
+}
+@keyframes shake {
+    0% {transform: rotate(0deg);}
+    25% {transform: rotate(-5deg);}
+    50% {transform: rotate(+5deg);}
+    75% {transform: rotate(-3deg);}
+    100% {transform: rotate(0deg);}
+}
+
+.hero{
+    min-height: 500px;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width : 768px) {
+    .hero{
+        max-height: 300px;
+    }
+}
+
+.card-img-top {
+  height: 250px;        /* fixed height */
+  width: 100%;          /* full card width */
+  object-fit: cover;    /* crops image neatly without stretching */
+  object-position: center; /* centers the crop */
+}
+
+.hoverEffect:hover{
+    transform: scale(1.02);
+    transition: 0.4s ease-in-out;
+    box-shadow: 0 7px 15px rgba(45, 45, 45, 0.15);
+}

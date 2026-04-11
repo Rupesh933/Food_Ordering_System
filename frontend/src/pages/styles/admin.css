@@ -1,0 +1,52 @@
+.icon-fix{
+    position: relative;
+    margin-bottom : 6px;
+}
+.icon-fix2{
+    position: relative;
+    margin-bottom : 5px;
+}
+
+.sidebar {
+    width: 290px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: transform 0.4s ease;
+    z-index: 100;
+}
+
+.sidebar-open {
+    transform: translateX(0);
+}
+
+.sidebar-closed {
+    transform: translateX(-290px);
+}
+
+#page-content-wrapper.with-sidebar{
+    margin-left: 290px;
+    width: 100%;
+    transition: margin-left 0.5s ease;
+}
+#page-content-wrapper.full-sidebar{
+    margin-left: 0px;
+    transition: margin-left 0.5s ease;
+}
+
+.nav-link-custom {
+    color: black !important;
+    font-weight: normal;
+    transition: color 0.4s ease, font-weight 0.4s ease;
+}
+
+.nav-link-custom:hover {
+    color: white !important;
+    font-weight: bold;
+}
+
+.nav-link-active {
+    color: white !important;
+    font-weight: bold;
+}
