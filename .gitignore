@@ -60,5 +60,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Demo Image
-demo-img/
+# Demo Images
+demo_img/
