@@ -52,7 +52,8 @@ FoodOrderingSystemDjangoReact/
 │       │   ├── ManageCategory.jsx
 │       │   ├── Add_food.jsx
 │       │   ├── ManageFood.jsx
-│       │   └── SearchPages.jsx
+│       │   ├── SearchPages.jsx
+│       │   └── Cart.jsx
 │       ├── Component/          # Reusable UI components
 │       │   ├── AdminHeader.jsx
 │       │   ├── AdminSidebar.jsx
@@ -97,6 +98,9 @@ All endpoints are prefixed under `/api/` (configured via the main `urls.py`).
 | POST   | `login/`              | Login user (email or mobile)       |
 | GET    | `foods/<int:id>/`     | Get food item details by ID        |
 | POST   | `cart/add/`           | Add food item to cart              |
+| GET    | `cart/<int:user_id>/` | Get user's cart items              |
+| PUT    | `cart/update_quantity`| Update quantity of cart item       |
+| DELETE | `cart/delete/<id>/`   | Remove item from cart              |
 
 ---
 
@@ -187,6 +191,7 @@ All endpoints are prefixed under `/api/` (configured via the main `urls.py`).
 | `/manage-category`  | `ManageCategory`  | Manage existing categories     |
 | `/add-food`         | `Add_food`        | Add a new food item            |
 | `/manage-food`      | `ManageFood`      | Manage existing food items     |
+| `/cart`             | `Cart`            | User's shopping cart page      |
 
 ---
 
@@ -197,6 +202,7 @@ All endpoints are prefixed under `/api/` (configured via the main `urls.py`).
 - 🔍 Search food by name
 - 📄 View detailed food item information
 - 🛒 Add food items to cart
+- ➕ Update food quantities or remove items from cart
 - 📝 User registration (name, email, mobile, password)
 - 🔐 User login (via email or mobile number)
 
