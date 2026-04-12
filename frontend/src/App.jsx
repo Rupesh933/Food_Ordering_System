@@ -10,6 +10,7 @@ import SearchPages from './pages/SearchPages'
 import Registration from './Component/Registration'
 import Login from './Component/Login'
 import FoodDetails from './Component/FoodDetails'
+import Cart from './pages/Cart'
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path='/registration' element={ <Registration /> } />
         <Route path='/login' element={ <Login /> } />
         <Route path='/food/:id' element={ <FoodDetails /> } />
+        <Route path='/cart' element={ <Cart />} />
       </Routes>
     </BrowserRouter>
   )

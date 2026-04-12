@@ -2,7 +2,7 @@
 import email
 from rest_framework import status
 from .serializers import CategorySerializer, FoodSerializer
-from .models import *
+from .models import Category, Food, User, Order
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -158,3 +158,11 @@ def add_to_cart(request):
         return Response({'message':'Food Added Successfully'}, status=200)
     except:
         return Response({'message': 'Something went wrong'}, status=401)
+
+
+from .serializers import CartOrderSerializer
+@api_view(['GET'])
+def get_cart_item(request, user_id):
+    orders = Order.objects.filter(user_id=user_id, is_order_placed=False).select_related('food')
+    serializer = CartOrderSerializer(orders, many=True)
+    return Response(serializer.data)
