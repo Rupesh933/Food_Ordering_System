@@ -166,3 +166,29 @@ def get_cart_item(request, user_id):
     orders = Order.objects.filter(user_id=user_id, is_order_placed=False).select_related('food')
     serializer = CartOrderSerializer(orders, many=True)
     return Response(serializer.data)
+
+@api_view(['PUT'])
+def update_cart_quantity(request):
+    order_id = request.data.get('orderId')
+    quantity = request.data.get('quantity')
+
+    if quantity < 1:
+        return Response({'message': 'Invalid quantity'}, status=400)
+
+    try:
+        order = Order.objects.get(id=order_id, is_order_placed=False)
+        order.quantity = quantity
+        order.save()
+        return Response({'message': 'Quantity updated successfully'}, status=200)
+
+    except Order.DoesNotExist:
+        return Response({'message': 'Order not found'}, status=404)
+
+@api_view(['DELETE'])
+def delete_cart_item(request, order_id):
+    try :
+        order = Order.objects.get(id=order_id, is_order_placed=False)
+        order.delete()
+        return Response({'message': 'Quantity deleted successfully'}, status=200)
+    except Order.DoesNotExist:
+        return Response({'message': 'Order not found'}, status=404)

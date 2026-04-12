@@ -19,4 +19,4 @@ class CartOrderSerializer(serializers.ModelSerializer):
     food = FoodSerializer()  # to access food model
     class Meta:
         model = Order
-        field = ['id', 'food', 'quantity']
+        fields = ['id', 'food', 'quantity']
