@@ -42,3 +42,13 @@ class Order(models.Model):
 
     def __str__(self) -> str:
         return f'{self.order_number} ({self.user})'
+
+class OrderAddress(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    order_number = models.CharField(max_length=100, null = True)
+    address = models.TextField()
+    order_time = models.DateTimeField(auto_now_add=True)
+    order_find_status = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return f'{self.order_number} ({self.user})'
