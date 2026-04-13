@@ -1,3 +1,4 @@
+from django.core.checks import model_checks
 from django.db import models
 
 # Create your models here.
@@ -52,3 +53,13 @@ class OrderAddress(models.Model):
 
     def __str__(self):
         return f'{self.order_number} ({self.user})'
+
+class FoodTracking(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    remark = models.CharField(max_length=200, null=True)
+    status = models.CharField(max_length=200, null=True)
+    status_date = models.DateTimeField(auto_now_add=True)
+    order_cancelled_by_user = models.BooleanField(null=True)
+
+    def __str__(self):
+        return f'{self.order} - {self.status}'
