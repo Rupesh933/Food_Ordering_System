@@ -40,7 +40,7 @@ def list_category(request):
     print('serializer : ', serializer)
     return Response(serializer.data)
 
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser     # MultiPartParser --> images/pdf/videos and formParser --> only contain text
 from rest_framework.decorators import parser_classes
 @api_view(['POST'])
 @parser_classes([MultiPartParser, FormParser])

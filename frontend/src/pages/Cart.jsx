@@ -3,11 +3,14 @@ import PublicLayout from "../Component/PublicLayout";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaMinus, FaPlus, FaShoppingCart, FaTrash } from "react-icons/fa";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const userId = localStorage.getItem("userId");
   const [cartItem, setCartItem] = useState([]);
   const [grandTotal, setGrandTotal] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!userId) {
@@ -175,7 +178,10 @@ const Cart = () => {
         <div className="card p-4 mt-4 shadow-sm border-0">
           <h4 className="text-end">Total: ₹{grandTotal.toFixed(2)}</h4>
           <div className="text-end">
-            <button className="btn btn-primary mt-3 py-3 px-4">
+            <button
+              className="btn btn-primary mt-3 py-3 px-4"
+              onClick={() => navigate("/payment")}
+            >
               Proceed to Payment
             </button>
           </div>
