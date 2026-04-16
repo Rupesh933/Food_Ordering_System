@@ -8,7 +8,6 @@ myenv/
 # django stuff
 *.log
 db.sqlite3
-media/
 
 # static files (optional if collected)
 staticfiles/

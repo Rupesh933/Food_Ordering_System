@@ -76,7 +76,7 @@ const PaymentPage = () => {
           </div>
           <div className="mb-3 form-check">
             <input
-              name="paymentGroup"
+              id="cod"
               type="radio"
               className="form-check-input"
               value="online"
@@ -89,7 +89,7 @@ const PaymentPage = () => {
           </div>
           <div className="mb-3 form-check">
             <input
-              name="paymentGroup"
+              id="online"
               type="radio"
               className="form-check-input"
               value="online"
@@ -100,6 +100,59 @@ const PaymentPage = () => {
               Online Payment
             </label>
           </div>
+          {paymentMode === "online" && (
+            <div className="row">
+              <div className="col-md-6">
+                <label className="form-label">Card Number</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter your card number"
+                  value={cardDetails.cardNumber}
+                  onClick={(e) =>
+                    setCardDetails({
+                      ...cardDetails,
+                      cardNumber: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="col-md-3">
+                <label className="form-label">Expiry Date</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="MM/YY"
+                  value={cardDetails.expiry}
+                  onClick={(e) =>
+                    setCardDetails({
+                      ...cardDetails,
+                      expiry: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="col-md-3">
+                <label className="form-label">CVV</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="***"
+                  value={cardDetails.cvv}
+                  onClick={(e) =>
+                    setCardDetails({
+                      ...cardDetails,
+                      cvv: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            </div>
+          )}
+
+          <button className="btn btn-success mt-4 w-100">
+            <i className="fas fa-check-circle me-2"></i>
+            Pay Now</button>
         </div>
       </div>
     </PublicLayout>
