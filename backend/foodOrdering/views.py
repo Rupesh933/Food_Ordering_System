@@ -192,3 +192,7 @@ def delete_cart_item(request, order_id):
         return Response({'message': 'Quantity deleted successfully'}, status=200)
     except Order.DoesNotExist:
         return Response({'message': 'Order not found'}, status=404)
+
+
+def place_order(request):
+    pass
