@@ -23,8 +23,9 @@ const PaymentPage = () => {
       if (!cardNumber || !expiry || !cvv) {
         toast.error("please fill in all card details");
       }
+}
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/", {
+        const response = await fetch("http://127.0.0.1:8000/api/place_order/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -46,11 +47,12 @@ const PaymentPage = () => {
         } else {
           toast.error(result.message);
         }
+
       } catch (error) {
         console.log(error);
         toast.error("Server is not running..");
       }
-    }
+    
   };
   return (
     <PublicLayout>
@@ -71,7 +73,7 @@ const PaymentPage = () => {
               rows="3"
               placeholder="Enter your full delivery address"
               value={address}
-              onChange={(e) => paymentMode("cod")}
+              onChange={(e) => setAddress(e.target.value)}
             ></textarea>
           </div>
           <div className="mb-3 form-check">
@@ -79,7 +81,7 @@ const PaymentPage = () => {
               id="cod"
               type="radio"
               className="form-check-input"
-              value="online"
+              value="cod"
               checked={paymentMode === "cod"}
               onChange={(e) => setPaymentMode("cod")}
             />
@@ -109,7 +111,7 @@ const PaymentPage = () => {
                   className="form-control"
                   placeholder="Enter your card number"
                   value={cardDetails.cardNumber}
-                  onClick={(e) =>
+                  onChange={(e) =>
                     setCardDetails({
                       ...cardDetails,
                       cardNumber: e.target.value,
@@ -124,7 +126,7 @@ const PaymentPage = () => {
                   className="form-control"
                   placeholder="MM/YY"
                   value={cardDetails.expiry}
-                  onClick={(e) =>
+                  onChange={(e) =>
                     setCardDetails({
                       ...cardDetails,
                       expiry: e.target.value,
@@ -139,7 +141,7 @@ const PaymentPage = () => {
                   className="form-control"
                   placeholder="***"
                   value={cardDetails.cvv}
-                  onClick={(e) =>
+                  onChange={(e) =>
                     setCardDetails({
                       ...cardDetails,
                       cvv: e.target.value,
@@ -150,7 +152,7 @@ const PaymentPage = () => {
             </div>
           )}
 
-          <button className="btn btn-success mt-4 w-100">
+          <button className="btn btn-success mt-4 w-100" onClick={handlePlaceOrder}>
             <i className="fas fa-check-circle me-2"></i>
             Pay Now</button>
         </div>

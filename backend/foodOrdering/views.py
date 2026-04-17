@@ -2,7 +2,7 @@
 import email
 from rest_framework import status
 from .serializers import CategorySerializer, FoodSerializer
-from .models import Category, Food, User, Order
+from .models import *
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -194,5 +194,44 @@ def delete_cart_item(request, order_id):
         return Response({'message': 'Order not found'}, status=404)
 
 
+def make_unique_order_number():
+    while True:
+        num = str(random.randint(100000000, 999999999))
+        if not OrderAddress.objects.filter(order_number=num).exists():
+            return num
+
+@api_view(['POST'])
 def place_order(request):
-    pass
+    user_id = request.data.get('userId')
+    address = request.data.get('address')
+    paymentMode = request.data.get('paymentMode')
+    cardNumber = request.data.get('cardNumber')
+    expiry = request.data.get('expiry')
+    cvv = request.data.get('cvv')
+
+    try:
+        orders = Order.objects.filter(user_id=user_id, is_order_placed=False)
+
+        order_number = make_unique_order_number()
+
+        OrderAddress.objects.create(
+            user_id = user_id,
+            order_number = order_number,
+            address = address
+        )
+
+        PaymentDetails.objects.create(
+            user_id = user_id,
+            order_number = order_number,
+            payment_mode = paymentMode,
+            card_number = cardNumber if paymentMode == 'online' else None,
+            expiry_date = expiry if paymentMode == 'online' else None,
+            cvv = cvv if paymentMode == 'online' else None
+        )
+
+        orders.update(order_number=order_number, is_order_placed=True)
+
+        return Response({'message':f'Order placed successfully!! order no:{order_number}'}, status=201)
+
+    except Order.DoesNotExist:
+        return Response({'message':f'Order not found'}, status=401)
