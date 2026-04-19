@@ -49,7 +49,7 @@ class OrderAddress(models.Model):
     order_number = models.CharField(max_length=100, null = True)
     address = models.TextField()
     order_time = models.DateTimeField(auto_now_add=True)
-    order_find_status = models.CharField(max_length=200, null=True)
+    order_final_status = models.CharField(max_length=200, null=True)
 
     def __str__(self):
         return f'{self.order_number} ({self.user})'
@@ -93,7 +93,7 @@ class Review(models.Model):
 
 class wishlist(models.Model):
     user = models.ForeignKey(User, on_delete=CASCADE)
-    food = models.ForeignKey(Food, on_delete=CASCADE)
+    food = models.ForeignKey(Food, on_delete=CASCADE, null=True)
     added_food_on = models.DateTimeField(auto_now_add=True, null=True)
 
     class Meta:

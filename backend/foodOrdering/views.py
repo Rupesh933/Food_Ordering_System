@@ -235,3 +235,11 @@ def place_order(request):
 
     except Order.DoesNotExist:
         return Response({'message':f'Order not found'}, status=401)
+    
+from .serializers import MyOrderSerializers
+@api_view(['GET'])
+def user_orders(request, user_id):
+    orders = OrderAddress.objects.filter(user_id=user_id).order_by('order_time')
+    serializer = MyOrderSerializers(orders, many=True)
+    return Response(serializer.data)
+ 

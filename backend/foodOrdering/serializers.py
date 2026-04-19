@@ -20,3 +20,18 @@ class CartOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['id', 'food', 'quantity']
+
+class MyOrderSerializers(serializers.ModelSerializer):
+    order_final_status = serializers.SerializerMethodField()
+    class Meta:
+        model = OrderAddress
+        fields = ['order_number', 'order_time', 'order_final_status']
+
+    def get_order_final_status(self,obj):
+        return obj.order_final_status or 'Wating for Resturant Confirmation'
+    '''
+    if value exits 
+    obj.order_final_status = "Delivered"   ---> output will be --> Delivered
+    else 
+    obj.order_final_status = None  --> "Wating for Resturant Confirmation"
+    '''
