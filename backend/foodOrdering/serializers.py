@@ -40,5 +40,5 @@ class OrderSerializers(serializers.ModelSerializer):
     food = FoodSerializer()
 
     class Meta:
-        models = Order
-        field = ['food', 'quantity']
+        model = Order
+        fields = ['food', 'quantity']
