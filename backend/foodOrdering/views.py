@@ -240,6 +240,7 @@ from .serializers import MyOrderSerializers
 @api_view(['GET'])
 def user_orders(request, user_id):
     orders = OrderAddress.objects.filter(user_id=user_id).order_by('order_time')
+    print('orders: ',orders[0])
     serializer = MyOrderSerializers(orders, many=True)
+    print('serializer: ',serializer)
     return Response(serializer.data)
- 
