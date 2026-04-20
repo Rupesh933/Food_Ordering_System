@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const OrderDetails = () => {
 
@@ -10,6 +10,8 @@ const OrderDetails = () => {
 
     const navigate = useNavigate();
 
+    const { order_number } = useParams();
+
     useEffect (() => {
         if (!userId) {
             navigate('/login')
@@ -19,12 +21,13 @@ const OrderDetails = () => {
         .then(res => res.json() )
         .then(data => {
             setOrderAddress(data);
-        const total = data.reduce(
+        const totalAmount = data.reduce(
           (sum, item) => sum + item.food.item_price * item.quantity,
           0,
         ); // calcualte total price
+        setTotal(totalAmount)
         })
-    })
+    },[order_number])
   return (
     <div>OrderDetails</div>
   )

@@ -54,7 +54,7 @@ const MyOrder = () => {
                 </div>
                 <div className='mt-3 mt-md-0'>
                   <Link className='btn btn-outline-secondary btn-sm me-2 px-3'><FaMapMarkedAlt /> Track</Link>
-                  <Link className='btn btn-outline-primary btn-sm me-2 px-3' to={`/order-details/${order.order_number}`}><FaInfoCircle className='mb-1 mx-1' />View Details</Link>
+                  <Link className='btn btn-outline-primary btn-sm me-2 px-3' to={`/order-details/${orderItem.order_number}`}><FaInfoCircle className='mb-1 mx-1' />View Details</Link>
                 </div>
               </div>
             </div>
