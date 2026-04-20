@@ -35,3 +35,10 @@ class MyOrderSerializers(serializers.ModelSerializer):
     else 
     obj.order_final_status = None  --> "Wating for Resturant Confirmation"
     '''
+
+class OrderSerializers(serializers.ModelSerializer):
+    food = FoodSerializer()
+
+    class Meta:
+        models = Order
+        field = ['food', 'quantity']
