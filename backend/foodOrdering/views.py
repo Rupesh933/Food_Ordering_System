@@ -252,3 +252,10 @@ def order_by_order_number(request, order_number):
     orders = Order.objects.filter(order_number = order_number, is_order_placed=True).select_related('food')
     serializer = OrderSerializers(orders,many=True)
     return Response(serializer.data)
+
+from .serializers import OrderAddressSeraializers
+@api_view(['GET'])
+def get_order_address(request, order_number):
+    address = OrderAddress.objects.get(order_number=order_number)
+    serializer = OrderAddressSeraializers(address)
+    return Response(serializer.data)

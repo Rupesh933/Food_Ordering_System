@@ -42,3 +42,17 @@ class OrderSerializers(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['food', 'quantity']
+
+class OrderAddressSeraializers(serializers.ModelSerializer):
+    payment_mode = serializers.SerializerMethodField()
+
+    class Meta:
+        model = OrderAddress
+        fields = ['order_number', 'address', 'order_time', 'order_final_status', 'payment_mode']
+
+    def get_payment_mode(self, obj):
+        try:
+            payment = PaymentDetails.objects.get(order_number=obj.order_number)
+            return payment.payment_mode
+        except PaymentDetails.DoesNotExist:
+            return None
