@@ -259,3 +259,29 @@ def get_order_address(request, order_number):
     address = OrderAddress.objects.get(order_number=order_number)
     serializer = OrderAddressSeraializers(address)
     return Response(serializer.data)
+
+
+from django.shortcuts import render
+def generate_invoice(request, order_number):
+    orders = Order.objects.filter(order_number=order_number, is_order_placed=True).select_related('food')
+    address = OrderAddress.objects.get(order_number=order_number)
+
+    grand_total = 0
+    order_data = []
+
+    for order in orders:
+        total_price = order.food.item_price * order.quantity
+        grand_total += total_price
+        order_data.append({
+            'food' : order.food,
+            'quantity' : order.quantity,
+            'total_price' : total_price,
+        })
+
+    return render(request, 'invoice.html',{
+        'order_number' : order_number,
+        'order_data' : order_data,
+        'delivery_address' : address,
+        'grand_total' : grand_total,
+        'orders' : orders
+    })
