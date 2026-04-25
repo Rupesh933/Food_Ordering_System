@@ -77,13 +77,18 @@ const Login = () => {
                             <TbLockPassword size={25} className='mt-2 me-2' /><input type="password" name='password' className='form-control' value={formData.password} onChange={handleChange} placeholder='Enter your password' required />
                         </div>
                         <div className='d-flex justify-content-between'>
+                            <div>
                             <button className='btn btn-outline-primary'><CgLogIn className='me-1' />Login</button>
+                            </div>
+                             <div>
+                                <span className='mt-5'>new user</span>
                             <button 
                             type="button"
                             className='btn btn-outline-secondary' 
                             onClick={()=>navigate('/registration')}
-                            >
+                            >Register
                             </button>
+                            </div>
                             </div>
                         </form>
                 </div>
