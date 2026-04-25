@@ -305,3 +305,17 @@ def update_user_profile(request, user_id):
         serializer.save()
         return Response({'message':f'Profile Update successfully {user.first_name}'}, status=200)
     return Response(serializer.errors, status=400)
+
+@api_view(['POST'])
+def change_password(request, user_id):
+    current_password = request.data.get('currentPassword')
+    new_password = request.data.get('newPassword')
+
+    user = User.objects.get(id = user_id)
+    print('user: ', user)
+    if not check_password(current_password, user.password):   # check_password --> current password and user password match or not if not match than return false and if match than return true
+        return Response({'message':'Current Password is incorrect'}, status=400)
+    serializer = make_password(new_password)   # make_password --> new password hash me convert kar dega and uske baad save karna hai user model me
+    print('serializer: ',serializer)
+    user.save()
+    return Response({'message':'Password change successfully!'}, status=200)

@@ -23,5 +23,6 @@ urlpatterns = [
     path('invoice/<str:order_number>/', generate_invoice),
     path('user/<int:user_id>/', get_user_profile),
     path('user/update/<int:user_id>/',update_user_profile),
+    path('change_password/<int:user_id>/', change_password),
 
 ]
