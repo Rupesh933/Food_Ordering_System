@@ -264,7 +264,9 @@ def get_order_address(request, order_number):
 from django.shortcuts import render
 def generate_invoice(request, order_number):
     orders = Order.objects.filter(order_number=order_number, is_order_placed=True).select_related('food')
+    print("Orders data: ",orders)
     address = OrderAddress.objects.get(order_number=order_number)
+    print("Address Data: ",address)
 
     grand_total = 0
     order_data = []
@@ -277,6 +279,7 @@ def generate_invoice(request, order_number):
             'quantity' : order.quantity,
             'total_price' : total_price,
         })
+    print("Order_data: ", order_data)
 
     return render(request, 'invoice.html',{
         'order_number' : order_number,
@@ -285,3 +288,20 @@ def generate_invoice(request, order_number):
         'grand_total' : grand_total,
         'orders' : orders
     })
+
+from .serializers import UserSerializer
+@api_view(['GET'])
+def get_user_profile(request,user_id):
+    user = User.objects.get(id=user_id)
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+def update_user_profile(request, user_id):
+    user = User.objects.get(id=user_id)
+    serializer = UserSerializer(user, data=request.data, partial=True) # partial true because we want to update only one or two fields not all
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'message':f'Profile Update successfully {user.first_name}'}, status=200)
+    return Response(serializer.errors, status=400)

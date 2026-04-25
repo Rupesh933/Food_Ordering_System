@@ -21,5 +21,7 @@ urlpatterns = [
     path('orders/by_order_number/<str:order_number>/', order_by_order_number),   # str because model is declared by str
     path('order_address/<str:order_number>/', get_order_address),
     path('invoice/<str:order_number>/', generate_invoice),
+    path('user/<int:user_id>/', get_user_profile),
+    path('user/update/<int:user_id>/',update_user_profile),
 
 ]

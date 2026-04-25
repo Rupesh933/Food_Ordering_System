@@ -76,7 +76,7 @@ const PublicLayout = ({children}) => {
                             <FaUserShield className='me-1 mb-1'/>{userName}
                             </button>
                             <ul class="dropdown-menu">
-                                <li><Link class="dropdown-item" href="#"><FaUserCircle className='mb-1 me-1' />Profile</Link></li>
+                                <li><Link class="dropdown-item" to='/profile'><FaUserCircle className='mb-1 me-1' />Profile</Link></li>
                                 <li><Link class="dropdown-item" href="#"><IoMdSettings className='mb-1 me-1' /> Settings</Link></li>
                                 <li className="nav-item">
                                 <Link className="dropdown-item" to="/login" onClick={handleLogout}><CiLogout className='me-1 mb-1'/>Logout</Link>
